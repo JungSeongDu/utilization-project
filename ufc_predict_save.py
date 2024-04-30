@@ -135,7 +135,7 @@ print('test accuracy : %.2f%% \n' %(score[1]*100))
 
 
 #혼동행렬
-# 모델의 예측 확률a
+# 모델의 예측 확률
 y_test_pred_probs = model.predict(X_test)
 
 # 예측 확률 중에서 가장 높은 값을 갖는 클래스의 인덱스
