@@ -129,7 +129,7 @@ def plot_on_grid(test_set, idx_to_plot, img_size=(128, 128),title=""):
     else:
         print("샘플링할 요소가 충분하지 않습니다.")
 
-# 기존 코드
+
 test_set = test_datagen.flow_from_directory('logo/Dataset/LogoImages/Test/',
                                              target_size=(INPUT_SIZE, INPUT_SIZE),
                                              batch_size=1,
@@ -159,4 +159,8 @@ print(f"최종 strongly_right_idx 길이: {len(strongly_right_idx)}")
 plot_on_grid(test_set, strongly_right_idx, title="Strongly Right Predictions")
 
 plot_on_grid(test_set, weakly_wrong_idx,title="Weakly Wrong Predictions")
+
+
+
+
 
