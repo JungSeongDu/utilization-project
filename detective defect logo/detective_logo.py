@@ -73,8 +73,8 @@ model1.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"
 model2.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # 각 모델에 훈련
-model1.fit(training_set, epochs=30 , verbose=1)
-model2.fit(training_set, epochs=30, verbose=1)
+model1.fit(training_set, epochs=15 , verbose=1)
+model2.fit(training_set, epochs=15, verbose=1)
 
 # 모델 저장
 model1.save("logo_detect1.keras")
