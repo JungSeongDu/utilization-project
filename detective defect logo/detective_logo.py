@@ -11,7 +11,7 @@ import random
 # 초매개변수 정의
 FILTER_SIZE = 3
 NUM_FILTERS = 32
-INPUT_SIZE  = 128
+INPUT_SIZE  = 256
 MAXPOOL_SIZE = 2
 BATCH_SIZE = 16
 STEPS_PER_EPOCH = 20000//BATCH_SIZE
@@ -115,7 +115,7 @@ print(f"Ensemble Model Accuracy: {accuracy_ensemble:.2f}")
 #----------------------------------------------------------------------------------------
 
 
-def plot_on_grid(test_set, idx_to_plot, img_size=(128, 128),title=""):  
+def plot_on_grid(test_set, idx_to_plot, img_size=(INPUT_SIZE, INPUT_SIZE),title=""):  
     num_samples = min(4, len(idx_to_plot))  # 샘플 가능한 최대 수로 조정
     if num_samples > 0:
         fig, ax = plt.subplots(2, 2, figsize=(10, 10))  
