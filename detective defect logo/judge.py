@@ -7,9 +7,11 @@ import cv2
 model1 = keras.models.load_model("logo_detect1.keras")
 model2 = keras.models.load_model("logo_detect2.keras")
 
+INPUT_SIZE  = 256
+
 # 실시간 데이터 전처리 함수
 def preprocess_image(image):
-    image = cv2.resize(image, (28, 28))  # 이미지 크기 조정
+    image = cv2.resize(image, (INPUT_SIZE, INPUT_SIZE))  # 이미지 크기 조정
     image = image.astype("float32") / 255.0  # 정규화
     image = np.expand_dims(image, axis=-1)  # 채널 차원 추가
     image = np.expand_dims(image, axis=0)  # 배치 차원 추가
