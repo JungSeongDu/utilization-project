@@ -1,6 +1,6 @@
 import matplotlib
 matplotlib.use("TkAgg")
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img # type: ignore
 from matplotlib import pyplot as plt
 import numpy as np
 import os
@@ -55,14 +55,22 @@ for img_name in os.listdir(src_dir):
     # 증강 이미지 생성을 위한 flow 생성
     sample_augmented_images = image_generator.flow(
         img,
-        save_to_dir=save_dir,
+        batch_size=1,
+        save_to_dir=None,  # 저장 디렉토리를 지정하지 않음
         save_prefix=base_name + '_aug',
-        save_format='jpg'
+        save_format='jpeg'
     )
 
     # 증강 이미지 5개 생성 및 저장
-    for _ in range(5):
-        sample_augmented_images.__next__()
+    for i in range(5):
+        augmented_img = sample_augmented_images.__next__()[0]
+        augmented_img = array_to_img(augmented_img)
+
+        # RGBA 모드인 경우 RGB 모드로 변환
+        if augmented_img.mode == 'RGBA':
+            augmented_img = augmented_img.convert('RGB')
+
+        augmented_img.save(os.path.join(save_dir, f'{base_name}_aug_{i}.jpeg'))
 
 # 증강된 이미지 몇 개를 표시하기 위한 코드
 fig, ax = plt.subplots(2, 3, figsize=(20, 10))
@@ -88,4 +96,3 @@ for idx, (title, img) in enumerate(all_images):
     ax[int(idx/3), idx%3].set_title(title)
 
 plt.show()
-
