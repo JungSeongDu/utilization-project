@@ -61,8 +61,8 @@ for img_name in os.listdir(src_dir):
         save_format='jpeg'
     )
 
-    # 증강 이미지 5개 생성 및 저장
-    for i in range(5):
+    # 증강 이미지 생성 및 저장
+    for i in range(10):
         augmented_img = sample_augmented_images.__next__()[0]
         augmented_img = array_to_img(augmented_img)
 
@@ -85,14 +85,24 @@ all_images.append(('Original Image', original_image))
 augmented_images = [os.path.join(save_dir, f) for f in os.listdir(save_dir) if '_aug' in f]
 
 # 증강된 이미지 몇 개를 읽고 리스트에 추가
-for i in range(min(5, len(augmented_images))):
+for i in range(min(10, len(augmented_images))):
     img = plt.imread(augmented_images[i])
     all_images.append((f'Augmented Image {i+1}', img))
 
+
+# 동적으로 서브플롯 크기 결정
+rows = int(np.ceil(len(all_images) / 3))
+fig, ax = plt.subplots(rows, 3, figsize=(20, 10))
+
 # 이미지 플롯
 for idx, (title, img) in enumerate(all_images):
-    ax[int(idx/3), idx%3].imshow(img)
-    ax[int(idx/3), idx%3].axis('off')
-    ax[int(idx/3), idx%3].set_title(title)
+    row, col = divmod(idx, 3)
+    ax[row, col].imshow(img)
+    ax[row, col].axis('off')
+    ax[row, col].set_title(title)
+
+# 남은 서브플롯 숨기기
+for i in range(len(all_images), rows * 3):
+    fig.delaxes(ax.flatten()[i])
 
 plt.show()
