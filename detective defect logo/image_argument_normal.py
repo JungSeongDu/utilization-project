@@ -62,7 +62,7 @@ for img_name in os.listdir(src_dir):
     )
 
     # 증강 이미지 생성 및 저장
-    for i in range(10):
+    for i in range(5):
         augmented_img = sample_augmented_images.__next__()[0]
         augmented_img = array_to_img(augmented_img)
 
@@ -85,7 +85,7 @@ all_images.append(('Original Image', original_image))
 augmented_images = [os.path.join(save_dir, f) for f in os.listdir(save_dir) if '_aug' in f]
 
 # 증강된 이미지 몇 개를 읽고 리스트에 추가
-for i in range(min(10, len(augmented_images))):
+for i in range(min(5, len(augmented_images))):
     img = plt.imread(augmented_images[i])
     all_images.append((f'Augmented Image {i+1}', img))
 
