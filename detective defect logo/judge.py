@@ -6,6 +6,7 @@ import cv2
 # 모델 로드
 model1 = keras.models.load_model("logo_detect1.keras")
 model2 = keras.models.load_model("logo_detect2.keras")
+model3 = keras.models.load_model("logo_detect3.keras")
 
 INPUT_SIZE  = 256
 
@@ -22,7 +23,8 @@ def predict_realtime(image):
     preprocessed_image = preprocess_image(image)
     prediction1 = model1.predict(preprocessed_image)
     prediction2 = model2.predict(preprocessed_image)
-    ensemble_prediction = (prediction1 + prediction2) / 2
+    prediction3 = model3.predict(preprocessed_image)
+    ensemble_prediction = (prediction1 + prediction2 + prediction3) / 3
     final_prediction = 1 if ensemble_prediction > 0.5 else 0  # 이진 분류 결과 계산
     return final_prediction
 
